@@ -1,0 +1,31 @@
+version: '2.3'
+services:
+  core-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - test_celery_with_priority
+    ports:
+      - 5000:5000
+    volumes:
+      - $PWD:/opt/app
+    environment:
+      - C_FORCE_ROOT=1
+    links:
+      - redis
+    working_dir: /opt/app
+    command: bash -c "python app.py & python run_celery.py"
+
+  redis:
+    image: redis:6.0.4
+    restart: always
+    volumes:
+      - ./volumes/data:/data
+    networks:
+      - test_celery_with_priority 
+
+networks:
+  test_celery_with_priority:
+    external: true
