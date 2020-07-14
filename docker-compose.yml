@@ -1,6 +1,7 @@
 version: '2.3'
 services:
-  core-api:
+  test-api:
+    container_name: test-celery-with-priority
     build:
       context: .
       dockerfile: Dockerfile
