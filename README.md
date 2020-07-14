@@ -15,3 +15,8 @@ $ docker-compose up -d --build
 $ (new terminal to check container logs) docker logs -f test-celery-with-priority
 $ docker exec -it test-celery-with-priority python client.py
 ```
+
+## Important
+
+- Priority: A number between 0 and 255, where 255 is the highest priority.
+- Supported by: RabbitMQ, **Redis (Priority reversed, 0 is highest)**
